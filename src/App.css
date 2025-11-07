@@ -1,0 +1,360 @@
+/*
+  Tema base construido sobre Bootstrap
+  - Mantener la semántica y utilidades de Bootstrap (.container, .row, .col, .card, .btn, .form-control)
+  - Aplicar variables y overrides ligeros para un tema oscuro, espaciados y pequeñas utilidades.
+  - Coloca reglas específicas bajo .app-root para no contaminar globalmente.
+*/
+
+:root{
+  --app-bg: #071023;
+  --app-surface: #0b1220;
+  --app-text: #e6eef6;
+  --app-muted: #9aa4b2;
+  --app-primary: #06b6d4;
+  --app-accent: #7c3aed;
+  --app-success: #10b981;
+  --app-danger: #ef4444;
+  --app-border: rgba(255,255,255,0.06);
+  --app-shadow: 0 10px 30px rgba(2,6,23,0.6);
+  --app-radius: 10px;
+}
+
+/* Base --------------------------------------------------------------- */
+*{box-sizing:border-box}
+html,body,#root{height:100%}
+body{
+  margin:0;
+  font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  font-size:16px;
+  line-height:1.45;
+  background:var(--app-bg);
+  color:var(--app-text);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+/* Root wrapper usado por la app */
+.app-root{min-height:100vh;padding:36px 20px}
+
+/* Contenedor central (si se usa .container dentro de .app-root se aplica espaciado) */
+.app-root .container{max-width:1200px}
+
+/* Cards: preferir las utilidades de Bootstrap, pero añadimos una variante 'card-app' */
+.card-app{
+  background:linear-gradient(180deg,var(--app-surface), rgba(11,18,32,0.6));
+  border-radius:var(--app-radius);
+  padding:22px;
+  border:1px solid var(--app-border);
+  box-shadow:var(--app-shadow);
+}
+
+/* Botones: usar .btn de Bootstrap; .btn-primary mantendrá su estructura, añadimos color personalizado */
+.btn-primary{
+  background: linear-gradient(90deg,var(--app-primary),var(--app-accent)) !important;
+  border-color: rgba(255,255,255,0.06) !important;
+  color: #021018 !important;
+}
+.btn-outline-app{border-color:var(--app-border);color:var(--app-text)}
+
+/* Formularios: ligeros overrides para visual oscura */
+.form-control{
+  background: rgba(255,255,255,0.02);
+  border: 1px solid var(--app-border);
+  color: var(--app-text);
+  border-radius:8px;
+}
+.form-control:focus{box-shadow:0 8px 24px rgba(6,182,212,0.06);border-color: rgba(6,182,212,0.28)}
+
+/* Form field spacing */
+.form-field{margin-bottom:16px}
+.form-label{color:var(--app-muted);font-weight:600;margin-bottom:6px}
+
+/* Login/Register specific utils */
+.auth-card{max-width:760px;margin:28px auto}
+.auth-inner{display:flex;gap:24px;align-items:stretch}
+.auth-aside{flex:0 0 320px}
+.auth-main{flex:1}
+
+/* Garantizar que inputs no provoquen overflow */
+.field-input{min-width:0}
+.field-input .form-control{width:100%;box-sizing:border-box}
+
+/* Lists/cards spacing */
+.list-item{padding:16px;border-radius:10px;border:1px solid var(--app-border);background:transparent}
+
+/* Badges & alerts (usar utilidades Bootstrap por defecto preferiblemente) */
+.badge-app{background:rgba(6,182,212,0.12);color:var(--app-primary);font-weight:600;border-radius:999px;padding:6px 10px}
+
+/* Responsive tweaks */
+@media (max-width: 900px){
+  .app-root{padding:20px}
+  .auth-inner{flex-direction:column}
+  .auth-aside{flex:0 0 auto}
+  .auth-card{padding:16px}
+}
+
+/* Utilities */
+.muted{color:var(--app-muted)}
+.center{text-align:center}
+
+/* Keep file compact; prefer usar las utilidades de Bootstrap para la mayor parte del layout */
+
+/* Fin de App.css */
+/* ======================================================================
+   Nuevo diseño global — App.css
+   - Variables, reset y estilos base.
+   - Diseño limpio, accesible y responsive para todo el proyecto.
+   ====================================================================== */
+
+:root{
+  --bg: #0f1724; /* fondo oscuro suave */
+  --card: #0b1220; /* fondo de tarjetas */
+  --muted: #9aa4b2;
+  --text: #e6eef6;
+  --primary: #06b6d4; /* cian vibrante */
+  --accent: #7c3aed; /* morado */
+  --success: #10b981;
+  --danger: #ef4444;
+  --glass: rgba(255,255,255,0.04);
+  --glass-2: rgba(255,255,255,0.02);
+  --border: rgba(255,255,255,0.06);
+  --shadow: 0 8px 24px rgba(2,6,23,0.6);
+  --radius-sm: 6px;
+  --radius-md: 12px;
+}
+
+/* Reset moderno */
+*{box-sizing:border-box;margin:0;padding:0}
+html,body,#root{height:100%}
+body{
+  font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  background: linear-gradient(180deg,var(--bg), #071022 140%);
+  color:var(--text);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  line-height:1.45;
+  font-size:16px;
+  overflow-x: hidden; /* evita desbordes horizontales menores */
+}
+
+/* Contenedor principal (namespace: .app-container para no chocar con Bootstrap) */
+.app-container{
+  max-width:1280px;
+  margin:0 auto;
+  padding:36px 32px;
+}
+
+/* Cabecera / navegación */
+.app-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  padding:14px 20px;
+  border-radius:var(--radius-md);
+  background: linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border:1px solid var(--border);
+  box-shadow:var(--shadow);
+  margin-bottom:24px;
+}
+.brand{
+  display:flex;align-items:center;gap:12px;font-weight:700;color:var(--text);
+}
+.brand .logo{
+  width:40px;height:40px;border-radius:10px;background:linear-gradient(135deg,var(--primary),var(--accent));
+}
+.nav-actions{display:flex;gap:10px;align-items:center}
+
+/* Botones (namespaced .app-btn para evitar sobreescribir Bootstrap) */
+.app-btn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:10px;font-weight:600;border:1px solid transparent;cursor:pointer;transition:all .18s ease}
+.app-btn-primary{background:linear-gradient(90deg,var(--primary),#00cfe8);color:#011627;border:1px solid rgba(255,255,255,0.06)}
+.app-btn-ghost{background:transparent;border:1px solid var(--border);color:var(--text)}
+.app-btn-danger{background:linear-gradient(90deg,var(--danger),#ff6b6b);color:white}
+.app-btn:active{transform:translateY(1px)}
+.app-btn[disabled]{opacity:.5;cursor:not-allowed}
+
+/* Tarjetas (namespaced .app-card para evitar sobreescribir Bootstrap) */
+.app-card{background:linear-gradient(180deg,var(--card), rgba(10,14,20,0.6));border-radius:var(--radius-md);padding:24px;border:1px solid var(--border);box-shadow: 0 8px 28px rgba(2,6,23,0.5)}
+.app-card h3{margin-bottom:12px;color:var(--text)}
+.app-card p{color:var(--muted);margin-bottom:14px}
+.app-card, .card{overflow:hidden}
+
+/* Grid de productos / tarjetas */
+.products-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:22px}
+.product-card{display:flex;flex-direction:column;gap:10px}
+.product-card .thumb{height:160px;border-radius:10px;background:linear-gradient(135deg,#07182733,#0c1f2f33);display:flex;align-items:center;justify-content:center;color:var(--muted)}
+.price{font-weight:700;color:var(--primary)}
+
+/* Formularios y inputs (mejorados)
+   - Estructura: .form-field > .form-label + .field-input
+   - Clases útiles: .input-icon, .input-action, .field-help, .field-error, .is-invalid
+*/
+.form-field{display:flex;flex-direction:column;gap:12px;margin-bottom:16px}
+.form-label{font-size:1rem;color:var(--muted);display:block}
+.field-input{position:relative;display:flex;align-items:center}
+
+/* Permitir que los inputs se reduzcan en contenedores flexibles y evitar desbordes */
+.field-input{min-width:0}
+.field-input input,.field-input select,.field-input textarea{box-sizing:border-box;max-width:100%;min-width:0}
+
+.field-input input[type="text"],
+.field-input input[type="email"],
+.field-input input[type="password"],
+.field-input input[type="number"],
+.field-input select,
+.field-input textarea{
+  width:100%;
+  padding:14px 16px;
+  padding-left:44px; /* espacio para icono si existe */
+  border-radius:12px;
+  background:var(--glass);
+  border:1px solid var(--border);
+  color:var(--text);
+  outline:none;
+  font-size:15.5px;
+  transition:box-shadow .14s, border-color .14s, transform .12s;
+  box-sizing:border-box; /* asegurar comportamiento predecible */
+  max-width:100%;
+}
+.field-input textarea{padding-top:12px;padding-bottom:12px;min-height:100px;resize:vertical}
+.field-input input::placeholder,
+.field-input textarea::placeholder{color:rgba(230,238,246,0.45)}
+
+.field-input input:focus,
+.field-input select:focus,
+.field-input textarea:focus{
+  box-shadow:0 10px 30px rgba(6,182,212,0.06);
+  border-color:rgba(6,182,212,0.28);
+  transform:translateY(-1px);
+}
+
+.input-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);width:20px;height:20px;display:inline-flex;align-items:center;justify-content:center;color:var(--muted);pointer-events:none}
+.input-action{position:absolute;right:10px;top:50%;transform:translateY(-50%);display:inline-flex;gap:6px}
+.input-action .app-btn{padding:6px 10px;border-radius:8px;font-size:0.9rem}
+
+.input-group{display:flex;gap:8px}
+.input-group .field-input{flex:1;padding:0}
+.input-group .field-input input{border-radius:10px}
+
+.field-help{font-size:0.85rem;color:var(--muted);margin-top:4px}
+.field-error{font-size:0.88rem;color:var(--danger);background:rgba(239,68,68,0.04);padding:8px;border-radius:8px;border:1px solid rgba(239,68,68,0.07);margin-top:6px}
+
+.is-invalid{border-color:rgba(239,68,68,0.9)!important;box-shadow:0 8px 20px rgba(239,68,68,0.06)}
+
+/* Selects personalizados */
+.field-input select{appearance:none;background-image:linear-gradient(45deg,transparent 50%,var(--muted) 50%),linear-gradient(135deg,var(--muted) 50%,transparent 50%);background-position:calc(100% - 18px) calc(1em + 2px),calc(100% - 13px) calc(1em + 2px);background-size:7px 7px,7px 7px;background-repeat:no-repeat;padding-right:44px}
+
+/* Checkbox y radio estilizados */
+.checkbox, .radio{display:inline-flex;align-items:center;gap:10px;cursor:pointer}
+.checkbox input[type="checkbox"],.radio input[type="radio"]{appearance:none;-webkit-appearance:none;width:18px;height:18px;border-radius:6px;border:1px solid var(--border);display:inline-block;position:relative;background:transparent;cursor:pointer}
+.checkbox input[type="checkbox"]:checked{background:linear-gradient(90deg,var(--primary),var(--accent));border-color:transparent}
+.checkbox input[type="checkbox"]:checked::after{content:"";position:absolute;left:4px;top:3px;width:5px;height:9px;border:2px solid white;border-top:0;border-left:0;transform:rotate(35deg)}
+.radio input[type="radio"]{border-radius:999px}
+.radio input[type="radio"]:checked{background:linear-gradient(90deg,var(--primary),var(--accent));border-color:transparent}
+
+/* Toggle switch */
+.toggle{width:48px;height:28px;border-radius:999px;background:var(--glass);display:inline-block;position:relative;border:1px solid var(--border);cursor:pointer}
+.toggle .knob{position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:#fff;transition:left .14s cubic-bezier(.2,.8,.2,1),box-shadow .12s}
+.toggle.active{background:linear-gradient(90deg,var(--primary),#00cfe8);border-color:transparent}
+.toggle.active .knob{left:23px;box-shadow:0 6px 14px rgba(6,182,212,0.16)}
+
+/* File input estilizado */
+.file-input{display:flex;align-items:center;gap:10px}
+.file-input input[type="file"]{display:none}
+.file-input .file-btn{padding:8px 12px;border-radius:10px;background:var(--glass);border:1px solid var(--border);cursor:pointer}
+
+/* Botón de envío (más prominente) */
+.submit-button{background:linear-gradient(90deg,var(--primary),#00cfe8);color:#022026;padding:14px 20px;border-radius:12px;border:1px solid rgba(255,255,255,0.06);font-weight:700}
+.submit-button:hover{transform:translateY(-1px);box-shadow:0 14px 36px rgba(6,182,212,0.08)}
+
+/* Compatibilidad y ajustes para login y formularios ya existentes */
+.login-form .form-field{gap:10px}
+.login-form input{padding-left:14px}
+
+
+/* Login / Register */
+.auth-wrap{box-sizing:border-box;width:100%;max-width:420px;margin:36px auto;padding:20px;border-radius:14px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid var(--border);} 
+.auth-title{text-align:center;margin-bottom:12px;font-size:1.2rem}
+
+/* Dashboard layout */
+.layout{display:grid;grid-template-columns:260px 1fr;gap:20px}
+.sidebar{padding:16px;border-radius:12px;background:var(--glass-2);border:1px solid var(--border)}
+.main{min-height:60vh}
+
+/* Listas y tablas simples */
+.list{display:flex;flex-direction:column;gap:10px}
+.list-item{display:flex;justify-content:space-between;align-items:center;padding:16px;border-radius:12px;background:transparent;border:1px solid var(--border)}
+
+/* Carrito */
+.cart-item{display:flex;gap:12px;align-items:center}
+.cart-item .meta{flex:1}
+
+/* Badges / estado (namespaced .app-badge) */
+.app-badge{display:inline-block;padding:6px 10px;border-radius:999px;font-weight:700;font-size:.85rem}
+.app-badge--pending{background:rgba(255,152,0,0.12);color:#ffb74d}
+.app-badge--processing{background:rgba(33,150,243,0.08);color:#64b5f6}
+.app-badge--success{background:rgba(16,185,129,0.09);color:var(--success)}
+.app-badge--danger{background:rgba(239,68,68,0.08);color:var(--danger)}
+
+/* Mensajes (namespaced .app-alert para evitar choque con Bootstrap) */
+.app-alert{padding:12px 14px;border-radius:8px;font-weight:600}
+.app-alert--error{background:rgba(239,68,68,0.08);color:var(--danger);border:1px solid rgba(239,68,68,0.12)}
+.app-alert--success{background:rgba(16,185,129,0.06);color:var(--success)}
+
+/* Accesibilidad y utilidades */
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.center{text-align:center}
+.muted{color:var(--muted)}
+
+/* Animaciones sutiles */
+@keyframes floatUp{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.fade-in{animation:floatUp .34s cubic-bezier(.2,.8,.2,1) both}
+
+/* Responsive */
+@media (max-width:900px){
+  .layout{grid-template-columns:1fr}
+  .app-header{flex-direction:column;align-items:stretch}
+  .container{padding:18px}
+  .auth-wrap{margin:20px}
+  /* Reducir padding-left reservado para iconos en pantallas pequeñas */
+  .field-input input[type="text"],
+  .field-input input[type="email"],
+  .field-input input[type="password"],
+  .field-input input[type="number"],
+  .field-input select,
+  .field-input textarea{
+    padding-left:14px;
+  }
+}
+
+/* Compatibilidad con clases existentes del proyecto */
+.login-container{max-width:460px;margin:36px auto}
+.login-form{display:flex;flex-direction:column;gap:12px}
+.login-form input{background:var(--glass);border:1px solid var(--border)}
+.login-form button{border-radius:10px}
+
+.product-list-container{padding:8px}
+.product-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:16px;border-radius:12px;border:1px solid var(--border)}
+
+.client-card,.order-card{background:transparent;border:1px solid var(--border);border-radius:10px;padding:14px}
+
+/* Estados de pedido (con borde sutil) */
+.pending{border-left:4px solid rgba(255,152,0,0.9)}
+.processing{border-left:4px solid rgba(33,150,243,0.9)}
+.sent{border-left:4px solid rgba(6,182,212,0.9)}
+.delivered{border-left:4px solid rgba(16,185,129,0.9)}
+.canceled{border-left:4px solid rgba(239,68,68,0.9)}
+
+/* Botones de estado específicos */
+.pending-btn{background:transparent;border:1px solid rgba(255,152,0,0.14);color:#ffb74d}
+.processing-btn{background:transparent;border:1px solid rgba(33,150,243,0.14);color:#64b5f6}
+.sent-btn{background:transparent;border:1px solid rgba(6,182,212,0.14);color:#06b6d4}
+.delivered-btn{background:transparent;border:1px solid rgba(16,185,129,0.14);color:var(--success)}
+.canceled-btn{background:transparent;border:1px solid rgba(239,68,68,0.14);color:var(--danger)}
+
+/* Pequeños arreglos para elementos existentes repetidos */
+.error-message{color:var(--danger);background:rgba(239,68,68,0.06);padding:8px;border-radius:8px}
+.register-link{margin-top:10px;text-align:center}
+.register-link a{color:var(--primary)}
+
+/* Fin de App.css */
